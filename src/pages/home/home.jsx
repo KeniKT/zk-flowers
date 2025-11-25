@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Calendar, MapPin, Heart, Star, Award, Truck, Clock, Sparkles, Globe, Leaf, ArrowRight, Check, X } from 'lucide-react';
-import Navbar from '../../components/Navbar.jsx';
-import Footer from '../../components/Footer.jsx';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -113,8 +111,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black overflow-x-hidden">
-      <Navbar />
-
       <style jsx>{`
         :root {
           --burgundy-dark: #3d0a0a;
@@ -596,8 +592,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }
