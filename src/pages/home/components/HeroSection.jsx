@@ -1,24 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { ArrowRight, Sparkles, Globe, Leaf } from "lucide-react";
 
+// Import your local images from the assets folder
+import Home1 from "../../../assets/Home1.jpg";
+import Home2 from "../../../assets/Home2.jpg";
+import Home3 from "../../../assets/Home3.jpg";
+import Home4 from "../../../assets/Home4.jpg";
+import Home5 from "../../../assets/Home5.jpg";
+
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
     {
-      image: "https://images.unsplash.com/photo-1562690868-60bbe7293e94?auto=format&fit=crop&w=2000&q=80",
+      image: Home1,
       title: "Premium Ethiopian Roses",
       subtitle: "Cultivated at 1,900m altitude for exceptional quality"
     },
     {
-      image: "https://images.unsplash.com/photo-1496062031456-07b8f162a322?auto=format&fit=crop&w=2000&q=80",
+      image: Home2,
       title: "Sustainable Excellence",
       subtitle: "Environmentally responsible farming practices"
     },
     {
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=2000&q=80",
+      image: Home3,
       title: "Global Reach",
       subtitle: "Delivering beauty to markets worldwide"
+    },
+    {
+      image: Home4,
+      title: "Natural Beauty",
+      subtitle: "Fresh from our farms to your hands"
+    },
+    {
+      image: Home5,
+      title: "Quality Assurance",
+      subtitle: "Rigorously tested for perfection and longevity"
     }
   ];
 
@@ -45,16 +62,17 @@ export default function HeroSection() {
               alt={slide.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-green-900/80 to-green-800/60"></div>
+            {/* Add dark overlay for better text readability */}
+            <div className="absolute inset-0 bg-black/40"></div>
           </div>
         ))}
       </div>
 
-      {/* Hero Content */}
+      {/* Rest of your component remains the same */}
       <div className="relative z-10 h-full flex items-center justify-center px-6">
         <div className="max-w-6xl mx-auto text-center text-white">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full mb-8">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full mb-8 border border-white/30">
             <Sparkles className="w-5 h-5 text-green-300" />
             <span className="text-sm font-semibold tracking-wider text-green-100">
               ETHIOPIAN EXCELLENCE
@@ -67,10 +85,10 @@ export default function HeroSection() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-2xl md:text-3xl font-light mb-8 text-green-100 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-2xl md:text-3xl font-light mb-8 text-white max-w-3xl mx-auto leading-relaxed">
             {slides[currentSlide].title}
           </p>
-          <p className="text-lg text-green-200 mb-12 max-w-2xl mx-auto">
+          <p className="text-lg text-green-100 mb-12 max-w-2xl mx-auto">
             {slides[currentSlide].subtitle}
           </p>
 
@@ -94,7 +112,7 @@ export default function HeroSection() {
             ].map((feature, index) => (
               <div key={index} className="text-center">
                 <feature.icon className="w-8 h-8 text-green-300 mx-auto mb-2" />
-                <div className="text-sm text-green-200 font-medium">{feature.label}</div>
+                <div className="text-sm text-white font-medium">{feature.label}</div>
               </div>
             ))}
           </div>
