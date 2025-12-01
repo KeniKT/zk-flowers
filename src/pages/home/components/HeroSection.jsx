@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ArrowRight, ChevronDown, Globe, Leaf, Award } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 
 // Import your local images from the assets folder
@@ -79,80 +79,45 @@ export default function HeroSection() {
               className="w-full h-full object-cover"
               loading="eager"
             />
-            {/* Enhanced gradient overlay for better readability */}
-            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/30 to-transparent"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            {/* Even lighter overlay for maximum brightness */}
+            <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-black/15 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/15"></div>
           </div>
         ))}
       </div>
 
       {/* Content */}
       <div className={`relative z-20 h-full flex items-center justify-center px-6 transition-all duration-1000 ${
-        isLoaded ? 'opacity-100' : 'opacity-0'
+        isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}>
-        <div className="max-w-6xl mx-auto text-center text-white">
+        <div className="max-w-6xl mx-auto text-center">
           {/* Animated Main Heading */}
-          <div className="mb-8">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 tracking-tight">
-              <span className="text-white">ZK</span>
-              <span className="text-emerald-300 ml-2">Flowers</span>
+          <div className="mb-12">
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-none">
+              <span className="text-white drop-shadow-2xl">ZK</span>
+              <span className="text-emerald-300 ml-4 drop-shadow-2xl">Flowers</span>
             </h1>
-            <div className="h-1 w-32 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto mb-6"></div>
           </div>
 
           {/* Dynamic Title & Subtitle */}
-          <div className="mb-10">
-            <p className="text-2xl md:text-4xl font-light mb-4 text-white max-w-3xl mx-auto leading-snug">
+          <div className="space-y-4">
+            <p className="text-2xl md:text-3xl lg:text-4xl font-light text-white drop-shadow-xl max-w-4xl mx-auto leading-tight">
               {slides[currentSlide].title}
             </p>
-            <p className="text-lg md:text-xl text-emerald-100 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl lg:text-2xl text-emerald-50 drop-shadow-lg max-w-3xl mx-auto leading-relaxed font-light">
               {slides[currentSlide].subtitle}
             </p>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Link
-              to="/products"
-              className="group px-8 py-4 bg-gradient-to-r from-emerald-600 to-green-600 text-white rounded-lg hover:from-emerald-700 hover:to-green-700 transition-all duration-300 hover:shadow-2xl flex items-center justify-center gap-3 font-semibold text-lg transform hover:scale-105"
-            >
-              Explore Our Collection
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
-            </Link>
-            <Link
-              to="/contact"
-              className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-lg hover:bg-white/20 transition-all duration-300 border border-white/20 font-semibold text-lg hover:shadow-lg"
-            >
-              Request Quote
-            </Link>
-          </div>
-
-          {/* Features Bar */}
-          <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-            {[
-              { icon: Leaf, label: "Sustainable Farming", detail: "Eco-Certified" },
-              { icon: Globe, label: "Global Export", detail: "25+ Countries" },
-              { icon: Award, label: "Premium Quality", detail: "ISO Certified" }
-            ].map((feature, index) => (
-              <div key={index} className="text-center group">
-                <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-white/20 transition-all duration-300">
-                  <feature.icon className="w-6 h-6 text-emerald-300" />
-                </div>
-                <div className="text-sm font-medium text-white mb-1">{feature.label}</div>
-                <div className="text-xs text-emerald-200/80">{feature.detail}</div>
-              </div>
-            ))}
           </div>
         </div>
       </div>
 
-      {/* Clean Arrow at Bottom */}
+      {/* Scroll Indicator */}
       <button
         onClick={scrollToNextSection}
-        className="absolute left-1/2 transform -translate-x-1/2 bottom-4 z-30 group"
+        className="absolute left-1/2 transform -translate-x-1/2 bottom-8 z-30 group"
         aria-label="Scroll to next section"
       >
-        <ChevronDown className="w-10 h-10 text-white/80 group-hover:text-emerald-300 transition-all duration-300 group-hover:scale-110 animate-bounce-slow" />
+        <ChevronDown className="w-10 h-10 text-white/80 group-hover:text-emerald-300 transition-all duration-300 animate-bounce-slow" />
       </button>
 
       {/* Custom Animations */}
@@ -162,27 +127,12 @@ export default function HeroSection() {
             transform: translateY(0);
           }
           50% {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
           }
         }
         
         .animate-bounce-slow {
-          animation: bounce-slow 2s infinite;
-        }
-        
-        .fade-in-up {
-          animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          animation: bounce-slow 2.5s ease-in-out infinite;
         }
       `}</style>
     </section>
