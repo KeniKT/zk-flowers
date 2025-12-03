@@ -4,7 +4,7 @@ import VarietiesSection from "./components/VarietiesSection.jsx";
 import RoseVarietiesSection from "./components/RoseVarietiesSection";
 import ServicesSection from "./components/ServicesSection";
 import QualityStandardsSection from "./components/QualityStandardsSection";
-import CTASection from "./components/CTASection";
+
 
 export default function WhatWeOffer() {
   return (
@@ -14,7 +14,7 @@ export default function WhatWeOffer() {
       <RoseVarietiesSection />
       <ServicesSection />
       <QualityStandardsSection />
-      <CTASection />
+    
     </div>
   );
 }
