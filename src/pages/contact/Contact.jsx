@@ -1,18 +1,12 @@
 import React from "react";
 import HeroSection from "./components/HeroSection";
-import ContactMethods from "./components/ContactMethods";
-import ContactFormSection from "./components/ContactFormSection";
-import FAQSection from "./components/FAQSection";
-import SocialMediaSection from "./components/SocialMediaSection";
+import GetInTouch from "./components/GetInTouch";
 
 export default function Contact() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
+    <main className="min-h-screen bg-gradient-to-b from-white to-amber-50/30">
       <HeroSection />
-      <ContactMethods />
-      <ContactFormSection />
-      <FAQSection />
-      <SocialMediaSection />
-    </div>
+      <GetInTouch />
+    </main>
   );
 }
