@@ -260,7 +260,7 @@ export default function PartnersIntro() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start mb-12">
           {/* Partners List - Animated from left */}
           <div className="space-y-6">
             {partners.map((partner, index) => {
@@ -316,32 +316,32 @@ export default function PartnersIntro() {
             })}
           </div>
 
-          {/* Benefits - Animated from right */}
-          <div className="grid grid-cols-2 gap-4 md:gap-6">
+          {/* Benefits - Animated from right - Now properly proportioned */}
+          <div className="grid grid-cols-2 gap-4">
             {benefits.map((benefit, index) => {
               const BenefitIcon = benefit.icon;
               return (
                 <div 
                   key={index}
                   ref={(el) => addBenefitRef(el, index)}
-                  className="animate-benefit card-hover bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-green-100 flex flex-col items-center text-center group"
+                  className="animate-benefit card-hover bg-white/95 backdrop-blur-sm p-5 rounded-xl shadow-md border border-green-100 flex flex-col items-center text-center group h-full"
                 >
-                  {/* Gradient background circle */}
-                  <div className={`relative w-20 h-20 rounded-full bg-gradient-to-br ${benefit.color} p-0.5 mb-4 shadow-lg`}>
+                  {/* Gradient background circle - Smaller */}
+                  <div className={`relative w-14 h-14 rounded-full bg-gradient-to-br ${benefit.color} p-0.5 mb-3`}>
                     <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
-                      <BenefitIcon className="w-10 h-10 icon-gradient" />
+                      <BenefitIcon className="w-6 h-6 icon-gradient" />
                     </div>
-                    {/* Ring animation */}
-                    <div className="absolute inset-0 rounded-full border-4 border-transparent group-hover:border-emerald-200/50 transition-all duration-300"></div>
+                    {/* Ring animation - Smaller */}
+                    <div className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-emerald-200/50 transition-all duration-300"></div>
                   </div>
                   
-                  <div className="text-2xl font-bold text-gray-900 mb-1 group-hover:bg-gradient-to-r from-emerald-700 to-green-600 group-hover:bg-clip-text group-hover:text-transparent transition-all">
+                  <div className="text-lg font-bold text-gray-900 mb-1 group-hover:bg-gradient-to-r from-emerald-700 to-green-600 group-hover:bg-clip-text group-hover:text-transparent transition-all">
                     {benefit.title}
                   </div>
-                  <div className="text-gray-700 text-sm">{benefit.desc}</div>
+                  <div className="text-xs text-gray-600">{benefit.desc}</div>
                   
                   {/* Animated growing line */}
-                  <div className="w-0 h-0.5 bg-gradient-to-r from-emerald-400 to-green-400 mt-4 group-hover:w-12 transition-all duration-500"></div>
+                  <div className="w-0 h-0.5 bg-gradient-to-r from-emerald-400 to-green-400 mt-3 group-hover:w-8 transition-all duration-500"></div>
                 </div>
               );
             })}
