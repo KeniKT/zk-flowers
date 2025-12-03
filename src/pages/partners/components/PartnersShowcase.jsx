@@ -1,9 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Handshake, CheckCircle } from "lucide-react";
 
 export default function PartnersShowcase() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [hoveredPartner, setHoveredPartner] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   const partnerCategories = [
     { id: 'all', name: 'All Partners', icon: Handshake },
@@ -109,28 +132,41 @@ export default function PartnersShowcase() {
     : partners.filter(p => p.category === activeCategory);
 
   return (
-    <section className="py-16 px-4" style={{ backgroundColor: '#f0fdf4' }}>
+    <section 
+      ref={sectionRef}
+      className="relative py-16 px-6"
+      style={{ backgroundColor: '#f0fdf4' }}
+    >
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4" style={{ color: '#14482E' }}>Meet Our Partners</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+        {/* Heading - matching StorySection style */}
+        <div className={`mb-12 transition-all duration-700 transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
+          <h2 className="text-3xl font-bold mb-4" style={{ color: "#14482E" }}>
+            Meet Our Partners
+          </h2>
+          <div className="w-20 h-1 bg-green-600 mb-6"></div>
+          <p className="text-lg text-gray-700 max-w-2xl mb-8">
             Trusted organizations helping us deliver Ethiopian roses to the world
           </p>
 
           {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-3">
-            {partnerCategories.map((category) => (
+          <div className={`flex flex-wrap justify-start gap-3 transition-all duration-700 delay-200 transform ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            {partnerCategories.map((category, idx) => (
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all ${
+                className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 ${
                   activeCategory === category.id
                     ? 'shadow-lg'
                     : 'hover:shadow-md'
                 }`}
                 style={{
                   backgroundColor: activeCategory === category.id ? '#15803d' : 'white',
-                  color: activeCategory === category.id ? 'white' : '#14482E'
+                  color: activeCategory === category.id ? 'white' : '#14482E',
+                  transitionDelay: `${300 + idx * 50}ms`
                 }}
               >
                 <category.icon className="w-4 h-4" />
@@ -141,34 +177,41 @@ export default function PartnersShowcase() {
         </div>
 
         {/* Partners Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-8">
           {filteredPartners.map((partner, index) => (
             <div
               key={index}
               onMouseEnter={() => setHoveredPartner(index)}
               onMouseLeave={() => setHoveredPartner(null)}
-              className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all"
+              className={`bg-white rounded-xl overflow-hidden shadow-lg border border-green-100 hover:shadow-xl hover:border-green-300 transition-all duration-500 transform hover:-translate-y-2 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{
+                transitionDelay: `${400 + index * 100}ms`
+              }}
             >
               {/* Partner Image */}
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={partner.image}
                   alt={partner.name}
-                  className="w-full h-full object-cover transition-transform duration-500"
+                  className="w-full h-full object-cover transition-transform duration-700"
                   style={{ transform: hoveredPartner === index ? 'scale(1.1)' : 'scale(1)' }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full">
+                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full shadow-md transition-transform duration-300 hover:scale-110">
                   <span className="text-xs font-semibold" style={{ color: '#15803d' }}>
                     {partner.volume}
                   </span>
                 </div>
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="flex items-center gap-3">
-                    <span className="text-3xl">{partner.flag}</span>
+                    <span className="text-3xl transition-transform duration-300" style={{
+                      transform: hoveredPartner === index ? 'scale(1.2)' : 'scale(1)'
+                    }}>{partner.flag}</span>
                     <div>
                       <h3 className="text-white font-bold text-xl">{partner.name}</h3>
-                      <p className="text-white/80 text-sm">{partner.country}</p>
+                      <p className="text-white/90 text-sm">{partner.country}</p>
                     </div>
                   </div>
                 </div>
@@ -176,26 +219,29 @@ export default function PartnersShowcase() {
 
               {/* Partner Details */}
               <div className="p-6">
-                <p className="text-gray-700 mb-4 leading-relaxed text-sm">
+                <p className="text-gray-700 mb-4 leading-relaxed">
                   {partner.description}
                 </p>
                 
-                <div className="mb-4 p-3 rounded-lg" style={{ backgroundColor: '#f0fdf4' }}>
-                  <div className="flex items-center gap-2 mb-1">
+                <div className="mb-4 p-4 rounded-lg border border-green-200 transition-all duration-300 hover:bg-green-100" style={{ backgroundColor: '#f0fdf4' }}>
+                  <div className="flex items-center gap-2 mb-2">
                     <Handshake className="w-4 h-4" style={{ color: '#15803d' }} />
-                    <span className="text-xs font-semibold text-gray-600">Partnership</span>
+                    <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Partnership</span>
                   </div>
-                  <p className="text-sm" style={{ color: '#14482E' }}>{partner.partnership}</p>
+                  <p className="text-sm font-medium" style={{ color: '#14482E' }}>{partner.partnership}</p>
                 </div>
 
                 {/* Benefits */}
                 <div className="space-y-2">
-                  <div className="text-xs font-semibold text-gray-600 mb-2">KEY BENEFITS</div>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="text-xs font-semibold text-gray-600 uppercase tracking-wide mb-3">Key Benefits</div>
+                  <div className="grid grid-cols-2 gap-3">
                     {partner.benefits.map((benefit, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
-                        <CheckCircle className="w-3 h-3 flex-shrink-0" style={{ color: '#22c55e' }} />
-                        <span className="text-xs text-gray-600">{benefit}</span>
+                      <div 
+                        key={idx} 
+                        className="flex items-center gap-2 transition-transform duration-300 hover:translate-x-1"
+                      >
+                        <CheckCircle className="w-4 h-4 flex-shrink-0" style={{ color: '#22c55e' }} />
+                        <span className="text-sm text-gray-700">{benefit}</span>
                       </div>
                     ))}
                   </div>
