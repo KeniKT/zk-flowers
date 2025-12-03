@@ -7,7 +7,7 @@ import PartnersIntro from "./components/PartnersIntro";
 import ExportIntro from "./components/ExportIntro";
 import ContactIntro from "./components/ContactIntro";
 import StatsSection from "./components/StatsSection";
-import CTASection from "./components/CTASection";
+
 
 export default function Home() {
   return (
@@ -20,7 +20,7 @@ export default function Home() {
       <ExportIntro />
       <PartnersIntro />
       <ContactIntro />
-      <CTASection />
+      
     </div>
   );
 }
