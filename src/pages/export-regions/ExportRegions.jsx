@@ -3,7 +3,7 @@ import HeroSection from "./components/HeroSection";
 import RegionShowcase from "./components/RegionShowcase";
 import ExportAdvantages from "./components/ExportAdvantages";
 import LogisticsQuality from "./components/LogisticsQuality";
-import CTASection from "./components/CTASection";
+
 
 export default function ExportRegions() {
   return (
@@ -12,7 +12,7 @@ export default function ExportRegions() {
       <RegionShowcase />
       <ExportAdvantages />
       <LogisticsQuality />
-      <CTASection />
+    
     </div>
   );
 }
