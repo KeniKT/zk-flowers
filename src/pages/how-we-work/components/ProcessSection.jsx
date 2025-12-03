@@ -1,8 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Sprout, Scissors, Thermometer, Package, Plane, Eye, CheckCircle, Clock, AlertCircle } from "lucide-react";
 
 export default function ProcessSection() {
   const [activeProcess, setActiveProcess] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   const processSteps = [
     {
@@ -110,105 +133,134 @@ export default function ProcessSection() {
   ];
 
   return (
-    <section className="max-w-6xl mx-auto py-16 px-4">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold mb-4" style={{ color: '#14482E' }}>Our 6-Step Process</h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          From cultivation to delivery, every step is carefully managed to ensure premium quality
-        </p>
-      </div>
-
-      {/* Process Timeline */}
-      <div className="mb-12">
-        <div className="flex overflow-x-auto pb-4 gap-4 scrollbar-hide">
-          {processSteps.map((step, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveProcess(index)}
-              className={`flex-shrink-0 p-4 rounded-lg border-2 transition-all min-w-[200px] ${
-                activeProcess === index ? 'shadow-lg transform scale-105' : 'hover:shadow-md'
-              }`}
-              style={{
-                backgroundColor: activeProcess === index ? '#f0fdf4' : 'white',
-                borderColor: activeProcess === index ? step.color : '#dcfce7'
-              }}
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <div 
-                  className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold"
-                  style={{ backgroundColor: step.color }}
-                >
-                  {step.number}
-                </div>
-                <div className="text-left">
-                  <div className="font-bold" style={{ color: '#14482E' }}>{step.title}</div>
-                  <div className="text-xs text-gray-600">{step.duration}</div>
-                </div>
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Active Process Details */}
-      <div className="grid lg:grid-cols-2 gap-8">
-        {/* Image */}
-        <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl group">
-          <img
-            src={processSteps[activeProcess].image}
-            alt={processSteps[activeProcess].title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-          <div className="absolute top-6 left-6">
-            <div 
-              className="w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg"
-              style={{ backgroundColor: processSteps[activeProcess].color }}
-            >
-              {processSteps[activeProcess].number}
-            </div>
-          </div>
-          <div className="absolute bottom-6 left-6 right-6">
-            <h3 className="text-3xl font-bold text-white mb-2">
-              {processSteps[activeProcess].title}
-            </h3>
-            <div className="flex items-center gap-2 text-white/90">
-              <Clock className="w-4 h-4" />
-              <span className="text-sm">{processSteps[activeProcess].duration}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Details */}
-        <div>
-          <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            {processSteps[activeProcess].description}
+    <section 
+      ref={sectionRef}
+      className="relative py-16 px-6 bg-white"
+    >
+      <div className="max-w-6xl mx-auto">
+        {/* Heading - matching StorySection style */}
+        <div className={`mb-12 transition-all duration-700 transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
+          <h2 className="text-3xl font-bold mb-4" style={{ color: "#14482E" }}>
+            Our 6-Step Process
+          </h2>
+          <div className="w-20 h-1 bg-green-600 mb-6"></div>
+          <p className="text-lg text-gray-700 max-w-2xl">
+            From cultivation to delivery, every step is carefully managed to ensure premium quality
           </p>
+        </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border" style={{ borderColor: '#dcfce7' }}>
-            <h4 className="font-bold mb-4 flex items-center gap-2" style={{ color: '#14482E' }}>
-              <CheckCircle className="w-5 h-5" />
-              Process Details
-            </h4>
-            <div className="space-y-3">
-              {processSteps[activeProcess].details.map((detail, index) => (
-                <div key={index} className="flex items-start gap-3">
+        {/* Process Steps Grid */}
+        <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12 transition-all duration-700 delay-200 transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
+          {processSteps.map((step, index) => {
+            const IconComponent = step.icon;
+            return (
+              <button
+                key={index}
+                onClick={() => setActiveProcess(index)}
+                className={`p-4 rounded-xl border-2 transition-all duration-300 transform hover:-translate-y-1 ${
+                  activeProcess === index ? 'shadow-lg scale-105' : 'hover:shadow-md'
+                }`}
+                style={{
+                  backgroundColor: activeProcess === index ? '#f0fdf4' : 'white',
+                  borderColor: activeProcess === index ? step.color : '#dcfce7',
+                  transitionDelay: `${300 + index * 50}ms`
+                }}
+              >
+                <div className="flex flex-col items-center gap-2">
                   <div 
-                    className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
-                    style={{ backgroundColor: processSteps[activeProcess].color }}
-                  ></div>
-                  <span className="text-sm text-gray-700">{detail}</span>
+                    className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                    style={{ backgroundColor: step.color }}
+                  >
+                    <IconComponent className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-center">
+                    <div className="text-xs font-bold mb-1" style={{ color: step.color }}>
+                      {step.number}
+                    </div>
+                    <div className="font-bold text-sm" style={{ color: '#14482E' }}>
+                      {step.title}
+                    </div>
+                    <div className="text-xs text-gray-600 mt-1">
+                      {step.duration}
+                    </div>
+                  </div>
                 </div>
-              ))}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Active Process Details */}
+        <div className="grid lg:grid-cols-2 gap-8">
+          {/* Image */}
+          <div className={`relative h-[400px] rounded-xl overflow-hidden shadow-lg border border-green-100 group transition-all duration-700 delay-600 transform ${
+            isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+          }`}>
+            <img
+              src={processSteps[activeProcess].image}
+              alt={processSteps[activeProcess].title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+            <div className="absolute top-6 left-6">
+              <div 
+                className="w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg transition-transform duration-300 group-hover:scale-110"
+                style={{ backgroundColor: processSteps[activeProcess].color }}
+              >
+                {processSteps[activeProcess].number}
+              </div>
+            </div>
+            <div className="absolute bottom-6 left-6 right-6">
+              <h3 className="text-3xl font-bold text-white mb-2">
+                {processSteps[activeProcess].title}
+              </h3>
+              <div className="flex items-center gap-2 text-white/90">
+                <Clock className="w-4 h-4" />
+                <span className="text-sm">{processSteps[activeProcess].duration}</span>
+              </div>
             </div>
           </div>
 
-          <div className="mt-6 p-4 rounded-lg flex items-start gap-3" style={{ backgroundColor: '#f0fdf4' }}>
-            <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#15803d' }} />
-            <p className="text-sm text-gray-700">
-              <strong>Quality Focus:</strong> Each step includes quality checks to ensure only premium 
-              roses proceed to the next stage of processing.
+          {/* Details */}
+          <div className={`transition-all duration-700 delay-700 transform ${
+            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
+          }`}>
+            <p className="text-gray-700 text-lg leading-relaxed mb-6">
+              {processSteps[activeProcess].description}
             </p>
+
+            <div className="bg-white rounded-xl p-6 shadow-lg border border-green-100 hover:shadow-xl transition-all duration-300">
+              <h4 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: '#14482E' }}>
+                <CheckCircle className="w-5 h-5" style={{ color: processSteps[activeProcess].color }} />
+                Process Details
+              </h4>
+              <div className="space-y-3">
+                {processSteps[activeProcess].details.map((detail, index) => (
+                  <div 
+                    key={index} 
+                    className="flex items-start gap-3 transition-all duration-300 hover:translate-x-2"
+                  >
+                    <div 
+                      className="w-2 h-2 rounded-full mt-2 flex-shrink-0 transition-all duration-300 hover:scale-150"
+                      style={{ backgroundColor: processSteps[activeProcess].color }}
+                    ></div>
+                    <span className="text-gray-700 leading-relaxed">{detail}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-6 p-4 rounded-lg flex items-start gap-3 border border-green-200 transition-all duration-300 hover:bg-green-100" style={{ backgroundColor: '#f0fdf4' }}>
+              <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#15803d' }} />
+              <p className="text-sm text-gray-700 leading-relaxed">
+                <strong style={{ color: '#14482E' }}>Quality Focus:</strong> Each step includes quality checks to ensure only premium 
+                roses proceed to the next stage of processing.
+              </p>
+            </div>
           </div>
         </div>
       </div>
