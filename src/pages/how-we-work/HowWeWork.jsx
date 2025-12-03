@@ -4,7 +4,7 @@ import ProcessSection from "./components/ProcessSection";
 import QualityStandards from "./components/QualityStandards";
 import SustainabilitySection from "./components/SustainabilitySection";
 import TechnologySection from "./components/TechnologySection";
-import CTASection from "./components/CTASection";
+
 
 export default function HowWeWork() {
   return (
@@ -14,7 +14,7 @@ export default function HowWeWork() {
       <QualityStandards />
       <SustainabilitySection />
       <TechnologySection />
-      <CTASection />
+     
     </div>
   );
 }
