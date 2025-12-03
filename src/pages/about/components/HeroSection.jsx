@@ -1,74 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { MapPin, TrendingUp } from "lucide-react";
 
-// Correct import paths
-import hero1 from "../../../assets/hero.jpg";
-import hero2 from "../../../assets/hero1.jpg";
-import hero3 from "../../../assets/hero2.jpg";
-
 export default function HeroSection() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const images = [hero1, hero2, hero3];
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % images.length);
-  };
-
-  // Auto-slide every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <section className="relative text-white py-20 px-4 overflow-hidden" style={{ backgroundColor: "#0A5C2E" }}>
-      {/* Background Image Slider */}
-      <div className="absolute inset-0">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentSlide ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <img
-              src={image}
-              alt={`ZK Flowers ${index + 1}`}
-              className="w-full h-full object-cover"
-              style={{ imageRendering: 'high-quality' }}
-            />
-            {/* Dark overlay for better text readability */}
-            <div className="absolute inset-0 bg-black/30"></div>
+    <section className="relative text-white py-24 px-4" style={{ backgroundColor: '#14482E' }}>
+      <div className="max-w-6xl mx-auto">
+        <div className="flex items-center gap-3 mb-4">
+          <MapPin className="w-8 h-8" style={{ color: '#4ade80' }} />
+          <span className="text-sm tracking-wider" style={{ color: '#4ade80' }}>ABOUT US</span>
+        </div>
+        <h1 className="text-5xl md:text-6xl font-bold mb-6">ZK Flowers PLC</h1>
+        <p className="text-xl md:text-2xl font-light mb-8 max-w-3xl">
+          Building partnerships. Growing excellence. Delivering beauty worldwide.
+        </p>
+        <div className="flex flex-wrap gap-6 text-sm">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#22c55e' }}></div>
+            <span>Debre Zeit (Bishoftu), Ethiopia - 1,900m altitude, 45km from Addis Ababa</span>
           </div>
-        ))}
-      </div>
-
-      {/* Content with colored text */}
-      <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Text Container with Glass Morphism Effect */}
-        <div className="bg-black/40 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl">
-          {/* Main heading with green gradient text */}
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-green-300 to-emerald-200 bg-clip-text text-transparent drop-shadow-lg">
-            ZK Flowers PLC
-          </h1>
-          
-          {/* Subheading with light green text */}
-          <p className="text-2xl font-light mb-6 text-emerald-100 drop-shadow-md">
-            Building partnerships. Growing excellence. Delivering beauty worldwide.
-          </p>
-          
-          <div className="flex flex-wrap gap-4 text-sm">
-            {/* Location info with green accents */}
-            <div className="flex items-center gap-2 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-emerald-400/30">
-              <MapPin className="w-4 h-4 text-emerald-300" />
-              <span className="text-emerald-50">Debre Zeit (Bishoftu), Ethiopia - 1,900m altitude, 45km from Addis Ababa</span>
-            </div>
-            
-            {/* Growth info with green accents */}
-            <div className="flex items-center gap-2 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-emerald-400/30">
-              <TrendingUp className="w-4 h-4 text-emerald-300" />
-              <span className="text-emerald-50">Established 2008 | 300%+ Growth</span>
-            </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#f59e0b' }}></div>
+            <span>Established 2008</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#3b82f6' }}></div>
+            <span>300% Growth since establishment</span>
           </div>
         </div>
       </div>
