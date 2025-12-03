@@ -1,220 +1,369 @@
-import React, { useState } from "react";
-import { Ruler, Clock, CheckCircle, Star, ArrowRight } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { Ruler, Clock, CheckCircle, Star } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useInView } from "framer-motion";
+
+// Import all rose variety images from assets
+import UpperClass from '../../../assets/Upper Class.jpg';
+import Tecazi from '../../../assets/Tecazi.jpg';
+import PinkTacazi from '../../../assets/pink tacazi.jpg';
+import Labell from '../../../assets/Labell.jpg';
+import MoonWalk from '../../../assets/Moon walk.jpg';
+import PinkAthena from '../../../assets/pink athena.jpg';
+import BellaRose from '../../../assets/bella rose.jpg';
+import EverRed from '../../../assets/Ever red.jpg';
+import Bisou from '../../../assets/Bisou.jpg';
+import Espana from '../../../assets/Espana.jpg';
+import Athena from '../../../assets/Athena.jpg';
 
 export default function RoseVarietiesSection() {
   const [selectedVariety, setSelectedVariety] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
 
   const varieties = [
     {
-      name: "Moon Walk",
-      color: "Yellow",
+      name: "Upper Class",
+      color: "Premium Red",
       headSize: "5.5 cm",
-      lengths: ["40 cm", "50 cm", "60 cm", "70 cm"],
-      vaseLife: "10-15 days",
-      description: "Vibrant yellow blooms that bring sunshine to any arrangement. Perfect for celebrations and special occasions.",
-      features: ["Large head size", "Bright yellow petals", "Strong stems", "Excellent vase life"],
-      image: "https://images.unsplash.com/photo-1562690868-60bbe7293e94?auto=format&fit=crop&w=800&q=80",
-      gradient: "from-yellow-500/20 to-amber-500/20"
+      lengths: ["40 cm", "50 cm", "60 cm", "70 cm", "80 cm"],
+      vaseLife: "12-16 days",
+      description: "Premium deep red roses with exceptional form and structure. The flagship variety known for its rich color and long vase life. Perfect for luxury arrangements and high-end events.",
+      features: ["Premium deep red color", "Exceptional form", "Long vase life", "Strong stems", "Luxury grade"],
+      image: UpperClass,
+      gradient: "from-red-600/20 to-rose-800/20"
     },
     {
-      name: "La Belle",
+      name: "Tecazi",
+      color: "Classic Red",
+      headSize: "5.0 cm",
+      lengths: ["40 cm", "50 cm", "60 cm", "70 cm"],
+      vaseLife: "10-14 days",
+      description: "Classic red roses with vibrant color and excellent bud formation. A reliable variety that maintains its beauty throughout its vase life. Ideal for traditional arrangements.",
+      features: ["Vibrant red color", "Excellent bud formation", "Reliable quality", "Good stem strength", "Market favorite"],
+      image: Tecazi,
+      gradient: "from-red-500/20 to-rose-600/20"
+    },
+    {
+      name: "Pink Tacazi",
+      color: "Soft Pink",
+      headSize: "4.5 cm",
+      lengths: ["40 cm", "50 cm", "60 cm"],
+      vaseLife: "10-15 days",
+      description: "Delicate soft pink roses with a gentle hue. Perfect for romantic arrangements and spring-themed designs. The soft coloration makes it versatile for various floral compositions.",
+      features: ["Soft pink hue", "Delicate appearance", "Versatile use", "Good vase life", "Popular for events"],
+      image: PinkTacazi,
+      gradient: "from-pink-400/20 to-rose-300/20"
+    },
+    {
+      name: "Labell",
       color: "Lime Pink",
       headSize: "5.5 cm",
       lengths: ["40 cm", "50 cm", "60 cm", "70 cm"],
-      vaseLife: "10-15 days",
-      description: "Unique lime-pink coloration creates a stunning visual impact. Ideal for modern, sophisticated arrangements.",
-      features: ["Unique color blend", "Large blooms", "Premium quality", "Long-lasting freshness"],
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
-      gradient: "from-pink-500/20 to-lime-500/20"
+      vaseLife: "11-15 days",
+      description: "Unique lime-pink roses with distinctive color blending. Creates stunning visual impact in modern arrangements. A favorite for contemporary floral designs.",
+      features: ["Unique color blend", "Large blooms", "Modern appeal", "Long-lasting", "Distinctive look"],
+      image: Labell,
+      gradient: "from-lime-300/20 to-pink-400/20"
     },
     {
-      name: "Athena",
-      color: "White",
-      headSize: "4.5 cm",
-      lengths: ["40 cm", "50 cm", "60 cm", "70 cm"],
-      vaseLife: "10-15 days",
-      description: "Classic white roses symbolizing purity and elegance. Perfect for weddings, events, and timeless arrangements.",
-      features: ["Pure white petals", "Classic elegance", "Versatile use", "Consistent quality"],
-      image: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=80",
-      gradient: "from-gray-300/20 to-slate-300/20"
-    },
-    {
-      name: "Belle Rose",
-      color: "Pink/Green",
+      name: "Moon Walk",
+      color: "Bright Yellow",
       headSize: "5.5 cm",
       lengths: ["40 cm", "50 cm", "60 cm", "70 cm"],
       vaseLife: "10-15 days",
-      description: "Distinctive pink petals with green accents offer a unique aesthetic. Popular for creative and contemporary designs.",
-      features: ["Unique color mix", "Eye-catching appearance", "Large head", "Premium grade"],
-      image: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=800&q=80",
-      gradient: "from-pink-500/20 to-emerald-500/20"
+      description: "Vibrant yellow blooms that bring sunshine to any arrangement. The bright color symbolizes happiness and positivity. Perfect for celebrations and cheerful occasions.",
+      features: ["Bright yellow color", "Large head size", "Cheerful appearance", "Strong stems", "Excellent vase life"],
+      image: MoonWalk,
+      gradient: "from-yellow-400/20 to-amber-300/20"
+    },
+    {
+      name: "Pink Athena",
+      color: "Blush Pink",
+      headSize: "4.5 cm",
+      lengths: ["40 cm", "50 cm", "60 cm", "70 cm"],
+      vaseLife: "10-14 days",
+      description: "Elegant blush pink roses with soft gradient coloration. Named after the Greek goddess of wisdom, these roses embody grace and beauty in floral arrangements.",
+      features: ["Blush pink gradient", "Elegant appearance", "Graceful form", "Reliable quality", "Wedding favorite"],
+      image: PinkAthena,
+      gradient: "from-rose-200/20 to-pink-300/20"
+    },
+    {
+      name: "Bella Rose",
+      color: "Pink/Green Mix",
+      headSize: "5.5 cm",
+      lengths: ["40 cm", "50 cm", "60 cm", "70 cm"],
+      vaseLife: "10-15 days",
+      description: "Distinctive pink petals with unique green accents. This variety offers a modern aesthetic that stands out in contemporary floral designs and artistic arrangements.",
+      features: ["Pink-green mix", "Unique coloration", "Modern aesthetic", "Large blooms", "Artistic appeal"],
+      image: BellaRose,
+      gradient: "from-pink-400/20 to-emerald-300/20"
+    },
+    {
+      name: "Ever Red",
+      color: "Deep Crimson",
+      headSize: "5.0 cm",
+      lengths: ["40 cm", "50 cm", "60 cm", "70 cm"],
+      vaseLife: "12-16 days",
+      description: "Deep crimson roses with intense color saturation. Named for its enduring beauty and long vase life. A premium choice for passionate expressions and lasting arrangements.",
+      features: ["Deep crimson color", "Intense saturation", "Long vase life", "Premium quality", "Enduring beauty"],
+      image: EverRed,
+      gradient: "from-red-700/20 to-crimson-600/20"
     },
     {
       name: "Bisou",
       color: "Light Pink",
       headSize: "4.5 cm",
-      lengths: ["40 cm", "50 cm", "60 cm", "70 cm"],
+      lengths: ["40 cm", "50 cm", "60 cm"],
       vaseLife: "10-14 days",
-      description: "Delicate light pink roses perfect for romantic occasions. Soft, feminine beauty with excellent vase life.",
-      features: ["Soft pink tone", "Romantic appeal", "Delicate petals", "Reliable quality"],
-      image: "https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=800&q=80",
-      gradient: "from-rose-500/20 to-pink-500/20"
+      description: "Delicate light pink roses perfect for romantic occasions. The name 'Bisou' (French for 'kiss') reflects its gentle, affectionate appearance in floral designs.",
+      features: ["Light pink tone", "Romantic appeal", "Delicate petals", "Reliable quality", "French inspiration"],
+      image: Bisou,
+      gradient: "from-rose-100/20 to-pink-200/20"
     },
     {
-      name: "Topaz",
-      color: "Cream",
+      name: "Espana",
+      color: "Rich Orange-Red",
       headSize: "5.5 cm",
       lengths: ["40 cm", "50 cm", "60 cm", "70 cm"],
-      vaseLife: "10-15 days",
-      description: "Elegant cream-colored roses with warm undertones. Sophisticated choice for luxury arrangements.",
-      features: ["Warm cream tone", "Sophisticated look", "Large blooms", "Premium quality"],
-      image: "https://images.unsplash.com/photo-1455659817273-f96807779a8a?auto=format&fit=crop&w=800&q=80",
-      gradient: "from-amber-200/20 to-yellow-200/20"
+      vaseLife: "11-15 days",
+      description: "Rich orange-red roses inspired by Spanish passion. Vibrant and warm coloration that brings energy to any floral arrangement. Perfect for festive occasions.",
+      features: ["Orange-red blend", "Vibrant color", "Spanish inspiration", "Large heads", "Energetic appeal"],
+      image: Espana,
+      gradient: "from-orange-500/20 to-red-500/20"
     },
     {
-      name: "Sweetness",
-      color: "Pink",
-      headSize: "5.5 cm",
+      name: "Athena",
+      color: "Pure White",
+      headSize: "4.5 cm",
       lengths: ["40 cm", "50 cm", "60 cm", "70 cm"],
       vaseLife: "10-15 days",
-      description: "Rich pink roses with perfect form. A customer favorite for both retail and events.",
-      features: ["Rich pink color", "Perfect form", "Popular choice", "Excellent durability"],
-      image: "https://images.unsplash.com/photo-1487070183336-b863922373d4?auto=format&fit=crop&w=800&q=80",
-      gradient: "from-pink-600/20 to-rose-600/20"
-    },
-    {
-      name: "Cherry O",
-      color: "Red",
-      headSize: "5.5 cm",
-      lengths: ["40 cm", "50 cm", "60 cm", "70 cm"],
-      vaseLife: "10-15 days",
-      description: "Deep red roses representing passion and love. Classic choice for romantic occasions and celebrations.",
-      features: ["Deep red color", "Classic beauty", "Strong stems", "Long vase life"],
-      image: "https://images.unsplash.com/photo-1496062031456-07b8f162a322?auto=format&fit=crop&w=800&q=80",
-      gradient: "from-red-600/20 to-rose-700/20"
-    },
-    {
-      name: "Avalanche",
-      color: "White",
-      headSize: "5.5 cm",
-      lengths: ["40 cm", "50 cm", "60 cm", "70 cm"],
-      vaseLife: "10-15 days",
-      description: "Premium white roses with exceptional purity. Ideal for high-end weddings and luxury events.",
-      features: ["Pure white", "Premium grade", "Large heads", "Luxury quality"],
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
-      gradient: "from-white/20 to-gray-200/20"
-    },
-    {
-      name: "Shimmer",
-      color: "Lavender",
-      headSize: "5.5 cm",
-      lengths: ["40 cm", "50 cm", "60 cm", "70 cm"],
-      vaseLife: "10-15 days",
-      description: "Unique lavender-hued roses for distinctive arrangements. Perfect for creative floral designs.",
-      features: ["Unique lavender", "Distinctive look", "Creative appeal", "High quality"],
-      image: "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80",
-      gradient: "from-purple-400/20 to-lavender-400/20"
+      description: "Classic pure white roses symbolizing purity, elegance, and new beginnings. Named after the Greek goddess of wisdom and warfare, representing strength and beauty.",
+      features: ["Pure white petals", "Classic elegance", "Versatile use", "Wedding essential", "Symbolic meaning"],
+      image: Athena,
+      gradient: "from-gray-100/20 to-slate-100/20"
     }
   ];
 
+  // Handle image load
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
+  // Reset image loaded state when variety changes
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [selectedVariety]);
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, scale: 1.1 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
+
+  // Hover and tap variants for cards
+  const cardHover = {
+    scale: 1.03,
+    boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+    transition: { type: "spring", stiffness: 300 }
+  };
+
+  const cardTap = { 
+    scale: 0.98 
+  };
+
   return (
-    <section className="max-w-6xl mx-auto py-16 px-4">
-      <div className="text-center mb-12">
+    <motion.section 
+      ref={sectionRef}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={containerVariants}
+      className="max-w-6xl mx-auto py-16 px-4"
+    >
+      {/* Header */}
+      <motion.div variants={itemVariants} className="text-center mb-12">
         <h2 className="text-4xl font-bold mb-4" style={{ color: '#14482E' }}>Our Rose Varieties</h2>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Carefully selected varieties optimized for head size, color consistency, vase life, and market demand
+          Discover our collection of 11 rose varieties, each carefully cultivated for exceptional quality, color, and longevity
         </p>
-      </div>
+      </motion.div>
 
       {/* Featured Variety Display */}
       <div className="grid lg:grid-cols-2 gap-8 mb-12">
-        {/* Image Side */}
-        <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl group">
-          <img
-            src={varieties[selectedVariety].image}
-            alt={varieties[selectedVariety].name}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-          <div className={`absolute inset-0 bg-gradient-to-t ${varieties[selectedVariety].gradient} to-transparent mix-blend-overlay`}></div>
-          <div className="absolute top-6 left-6 right-6">
-            <div className="bg-white/95 backdrop-blur-sm rounded-full px-4 py-2 inline-block">
-              <span className="text-xs font-semibold tracking-wider" style={{ color: '#15803d' }}>
-                ALL YEAR AVAILABLE
-              </span>
-            </div>
-          </div>
-          <div className="absolute bottom-6 left-6 right-6 bg-black/60 backdrop-blur-sm rounded-xl p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-              <span className="text-white text-sm font-semibold">Premium Grade</span>
-            </div>
-          </div>
-        </div>
+        {/* Image Side - 1:1 Square Ratio */}
+        <motion.div 
+          variants={itemVariants}
+          className="relative"
+        >
+          <motion.div 
+            variants={imageVariants}
+            initial="hidden"
+            animate={imageLoaded ? "visible" : "hidden"}
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="relative aspect-square rounded-2xl overflow-hidden shadow-xl group bg-white"
+          >
+            {/* Main image container - 1:1 ratio, fills entire space */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedVariety}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.5 }}
+                className="relative w-full h-full flex items-center justify-center"
+              >
+                <img
+                  src={varieties[selectedVariety].image}
+                  alt={varieties[selectedVariety].name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  onLoad={handleImageLoad}
+                  loading="lazy"
+                />
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Subtle gradient overlay for depth */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${varieties[selectedVariety].gradient} opacity-10 mix-blend-overlay`}></div>
+            
+            {/* Shine effect on hover */}
+            <div className="absolute inset-0 bg-gradient-to-t from-white/0 via-white/0 to-white/0 group-hover:from-white/5 group-hover:via-white/0 group-hover:to-white/5 transition-all duration-500"></div>
+          </motion.div>
+        </motion.div>
 
         {/* Details Side */}
-        <div className="space-y-6">
+        <motion.div 
+          variants={itemVariants}
+          className="space-y-6"
+        >
           <div>
-            <h3 className="text-4xl font-bold mb-2" style={{ color: '#14482E' }}>
+            <motion.h3 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl font-bold mb-2" 
+              style={{ color: '#14482E' }}
+            >
               {varieties[selectedVariety].name}
-            </h3>
-            <div className="flex items-center gap-3 mb-4">
+            </motion.h3>
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex items-center gap-3 mb-4"
+            >
               <span className="text-lg font-semibold" style={{ color: '#15803d' }}>
                 {varieties[selectedVariety].color}
               </span>
               <span className="text-gray-400">•</span>
               <span className="text-gray-600">{varieties[selectedVariety].headSize} head size</span>
-            </div>
-            <p className="text-gray-700 leading-relaxed mb-6">
+              <span className="text-gray-400">•</span>
+              <span className="text-gray-600">{varieties[selectedVariety].vaseLife} vase life</span>
+            </motion.div>
+            <motion.p 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-gray-700 leading-relaxed mb-6"
+            >
               {varieties[selectedVariety].description}
-            </p>
+            </motion.p>
           </div>
 
           {/* Specifications Grid */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-white p-4 rounded-lg shadow-sm border-l-4" style={{ borderColor: '#15803d' }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="grid grid-cols-2 gap-4"
+          >
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              className="bg-white p-4 rounded-lg shadow-sm border-l-4 hover:shadow-md transition-shadow"
+              style={{ borderColor: '#15803d' }}
+            >
               <Ruler className="w-5 h-5 mb-2" style={{ color: '#14482E' }} />
               <div className="text-xs text-gray-600 mb-1">Available Lengths</div>
               <div className="text-sm font-semibold" style={{ color: '#14482E' }}>
                 {varieties[selectedVariety].lengths.join(', ')}
               </div>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border-l-4" style={{ borderColor: '#15803d' }}>
+            </motion.div>
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              className="bg-white p-4 rounded-lg shadow-sm border-l-4 hover:shadow-md transition-shadow"
+              style={{ borderColor: '#15803d' }}
+            >
               <Clock className="w-5 h-5 mb-2" style={{ color: '#14482E' }} />
               <div className="text-xs text-gray-600 mb-1">Vase Life</div>
               <div className="text-sm font-semibold" style={{ color: '#14482E' }}>
                 {varieties[selectedVariety].vaseLife}
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Features */}
-          <div className="bg-white p-6 rounded-lg shadow-sm border" style={{ borderColor: '#dcfce7' }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="bg-white p-6 rounded-lg shadow-sm border hover:shadow-md transition-shadow"
+            style={{ borderColor: '#dcfce7' }}
+          >
             <h4 className="font-bold mb-4" style={{ color: '#14482E' }}>Key Features</h4>
             <div className="grid grid-cols-2 gap-3">
               {varieties[selectedVariety].features.map((feature, index) => (
-                <div key={index} className="flex items-center gap-2">
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6 + (index * 0.1) }}
+                  className="flex items-center gap-2"
+                >
                   <CheckCircle className="w-4 h-4 flex-shrink-0" style={{ color: '#22c55e' }} />
                   <span className="text-sm text-gray-700">{feature}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
-
-          <button 
-            className="w-full py-4 rounded-lg font-semibold transition-all hover:shadow-lg flex items-center justify-center gap-2"
-            style={{ backgroundColor: '#15803d', color: 'white' }}
-          >
-            Request Sample
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* Variety Selector Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+      <motion.div 
+        variants={containerVariants}
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
+      >
         {varieties.map((variety, index) => (
-          <button
+          <motion.button
             key={index}
+            variants={itemVariants}
+            whileHover={cardHover}
+            whileTap={cardTap}
             onClick={() => setSelectedVariety(index)}
             className={`p-4 rounded-lg border-2 transition-all text-left ${
               selectedVariety === index
@@ -223,15 +372,15 @@ export default function RoseVarietiesSection() {
             }`}
             style={{
               backgroundColor: selectedVariety === index ? '#f0fdf4' : 'white',
-              borderColor: selectedVariety === index ? '#15803d' : '#dcfce7'
+              borderColor: selectedVariety === index ? '#15803d' : '#e5e7eb'
             }}
           >
             <div className="font-bold mb-1" style={{ color: '#14482E' }}>{variety.name}</div>
-            <div className="text-xs text-gray-600">{variety.color}</div>
-            <div className="text-xs text-gray-500 mt-2">{variety.headSize}</div>
-          </button>
+            <div className="text-xs text-gray-600 mb-2">{variety.color}</div>
+            <div className="text-xs text-gray-500">{variety.headSize}</div>
+          </motion.button>
         ))}
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 }
