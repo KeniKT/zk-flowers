@@ -4,7 +4,7 @@ import PartnershipValues from "./components/PartnershipValues";
 import PartnersShowcase from "./components/PartnersShowcase";
 import BecomePartner from "./components/BecomePartner";
 import PartnerBenefits from "./components/PartnerBenefits";
-import CTASection from "./components/CTASection";
+
 
 export default function OurPartners() {
   return (
@@ -14,7 +14,7 @@ export default function OurPartners() {
       <PartnersShowcase />
       <BecomePartner />
       <PartnerBenefits />
-      <CTASection />
+      
     </div>
   );
 }
