@@ -162,7 +162,7 @@ export default function RoseVarietiesSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.1,
         delayChildren: 0.1
       }
     }
@@ -188,9 +188,10 @@ export default function RoseVarietiesSection() {
 
   // Hover and tap variants for cards
   const cardHover = {
-    scale: 1.03,
-    boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
-    transition: { type: "spring", stiffness: 300 }
+    scale: 1.05,
+    y: -4,
+    boxShadow: "0 20px 40px rgba(20, 72, 46, 0.15)",
+    transition: { type: "spring", stiffness: 400, damping: 20 }
   };
 
   const cardTap = { 
@@ -203,19 +204,32 @@ export default function RoseVarietiesSection() {
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={containerVariants}
-      className="max-w-6xl mx-auto py-16 px-4"
+      className="max-w-7xl mx-auto py-20 px-4 bg-gradient-to-b from-white via-green-50/30 to-white"
     >
-      {/* Header */}
-      <motion.div variants={itemVariants} className="text-center mb-12">
-        <h2 className="text-4xl font-bold mb-4" style={{ color: '#14482E' }}>Our Rose Varieties</h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+      {/* Header with enhanced styling */}
+      <motion.div variants={itemVariants} className="text-center mb-16">
+        <motion.div 
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="inline-block mb-4"
+        >
+          <div className="flex items-center justify-center gap-2 px-4 py-2 bg-green-100/50 rounded-full border border-green-200">
+            <Star className="w-4 h-4" style={{ color: '#15803d' }} />
+            <span className="text-sm font-semibold" style={{ color: '#15803d' }}>Premium Collection</span>
+          </div>
+        </motion.div>
+        <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-green-900 to-green-700 bg-clip-text text-transparent">
+          Our Rose Varieties
+        </h2>
+        <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
           Discover our collection of 11 rose varieties, each carefully cultivated for exceptional quality, color, and longevity
         </p>
       </motion.div>
 
-      {/* Featured Variety Display */}
-      <div className="grid lg:grid-cols-2 gap-8 mb-12">
-        {/* Image Side - 1:1 Square Ratio */}
+      {/* Featured Variety Display with enhanced card */}
+      <div className="grid lg:grid-cols-2 gap-10 mb-16 bg-white rounded-3xl shadow-2xl p-8 border border-green-100">
+        {/* Image Side - Enhanced with better shadows and borders */}
         <motion.div 
           variants={itemVariants}
           className="relative"
@@ -224,50 +238,67 @@ export default function RoseVarietiesSection() {
             variants={imageVariants}
             initial="hidden"
             animate={imageLoaded ? "visible" : "hidden"}
-            whileHover={{ scale: 1.02 }}
+            whileHover={{ scale: 1.02, rotate: 0.5 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="relative aspect-square rounded-2xl overflow-hidden shadow-xl group bg-white"
+            className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl group bg-gradient-to-br from-green-50 to-white border-4 border-white"
+            style={{ boxShadow: "0 25px 50px -12px rgba(20, 72, 46, 0.25)" }}
           >
-            {/* Main image container - 1:1 ratio, fills entire space */}
+            {/* Main image container */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={selectedVariety}
                 initial={{ opacity: 0, scale: 1.1 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
+                exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.5 }}
-                className="relative w-full h-full flex items-center justify-center"
+                className="relative w-full h-full"
               >
                 <img
                   src={varieties[selectedVariety].image}
                   alt={varieties[selectedVariety].name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   onLoad={handleImageLoad}
                   loading="lazy"
                 />
               </motion.div>
             </AnimatePresence>
 
-            {/* Subtle gradient overlay for depth */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${varieties[selectedVariety].gradient} opacity-10 mix-blend-overlay`}></div>
+            {/* Enhanced gradient overlay */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${varieties[selectedVariety].gradient} opacity-20 mix-blend-overlay`}></div>
             
-            {/* Shine effect on hover */}
-            <div className="absolute inset-0 bg-gradient-to-t from-white/0 via-white/0 to-white/0 group-hover:from-white/5 group-hover:via-white/0 group-hover:to-white/5 transition-all duration-500"></div>
+            {/* Animated shine effect */}
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0"
+              animate={{ 
+                x: ['-100%', '100%'],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                repeatDelay: 5,
+                ease: "easeInOut"
+              }}
+            />
+            
+            {/* Corner accent */}
+            <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-green-100">
+              <span className="text-xs font-bold" style={{ color: '#14482E' }}>Premium</span>
+            </div>
           </motion.div>
         </motion.div>
 
-        {/* Details Side */}
+        {/* Details Side - Enhanced typography and spacing */}
         <motion.div 
           variants={itemVariants}
-          className="space-y-6"
+          className="space-y-6 flex flex-col justify-center"
         >
           <div>
             <motion.h3 
+              key={`title-${selectedVariety}`}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-4xl font-bold mb-2" 
-              style={{ color: '#14482E' }}
+              className="text-5xl font-extrabold mb-3 bg-gradient-to-r from-green-900 to-green-700 bg-clip-text text-transparent"
             >
               {varieties[selectedVariety].name}
             </motion.h3>
@@ -275,27 +306,28 @@ export default function RoseVarietiesSection() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex items-center gap-3 mb-4"
+              className="flex flex-wrap items-center gap-3 mb-5"
             >
-              <span className="text-lg font-semibold" style={{ color: '#15803d' }}>
+              <span className="text-lg font-bold px-4 py-1.5 bg-green-100 rounded-full" style={{ color: '#15803d' }}>
                 {varieties[selectedVariety].color}
               </span>
               <span className="text-gray-400">•</span>
-              <span className="text-gray-600">{varieties[selectedVariety].headSize} head size</span>
+              <span className="text-gray-700 font-medium">{varieties[selectedVariety].headSize} head size</span>
               <span className="text-gray-400">•</span>
-              <span className="text-gray-600">{varieties[selectedVariety].vaseLife} vase life</span>
+              <span className="text-gray-700 font-medium">{varieties[selectedVariety].vaseLife} vase life</span>
             </motion.div>
             <motion.p 
+              key={`desc-${selectedVariety}`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-gray-700 leading-relaxed mb-6"
+              className="text-gray-700 leading-relaxed mb-6 text-base"
             >
               {varieties[selectedVariety].description}
             </motion.p>
           </div>
 
-          {/* Specifications Grid */}
+          {/* Specifications Grid - Enhanced cards */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -303,49 +335,46 @@ export default function RoseVarietiesSection() {
             className="grid grid-cols-2 gap-4"
           >
             <motion.div 
-              whileHover={{ scale: 1.05 }}
-              className="bg-white p-4 rounded-lg shadow-sm border-l-4 hover:shadow-md transition-shadow"
-              style={{ borderColor: '#15803d' }}
+              whileHover={{ scale: 1.05, y: -2 }}
+              className="bg-gradient-to-br from-green-50 to-white p-5 rounded-2xl shadow-lg border-2 border-green-200 hover:border-green-400 hover:shadow-xl transition-all"
             >
-              <Ruler className="w-5 h-5 mb-2" style={{ color: '#14482E' }} />
-              <div className="text-xs text-gray-600 mb-1">Available Lengths</div>
-              <div className="text-sm font-semibold" style={{ color: '#14482E' }}>
+              <Ruler className="w-6 h-6 mb-3" style={{ color: '#14482E' }} />
+              <div className="text-xs text-gray-600 mb-2 font-semibold uppercase tracking-wide">Available Lengths</div>
+              <div className="text-sm font-bold" style={{ color: '#14482E' }}>
                 {varieties[selectedVariety].lengths.join(', ')}
               </div>
             </motion.div>
             <motion.div 
-              whileHover={{ scale: 1.05 }}
-              className="bg-white p-4 rounded-lg shadow-sm border-l-4 hover:shadow-md transition-shadow"
-              style={{ borderColor: '#15803d' }}
+              whileHover={{ scale: 1.05, y: -2 }}
+              className="bg-gradient-to-br from-green-50 to-white p-5 rounded-2xl shadow-lg border-2 border-green-200 hover:border-green-400 hover:shadow-xl transition-all"
             >
-              <Clock className="w-5 h-5 mb-2" style={{ color: '#14482E' }} />
-              <div className="text-xs text-gray-600 mb-1">Vase Life</div>
-              <div className="text-sm font-semibold" style={{ color: '#14482E' }}>
+              <Clock className="w-6 h-6 mb-3" style={{ color: '#14482E' }} />
+              <div className="text-xs text-gray-600 mb-2 font-semibold uppercase tracking-wide">Vase Life</div>
+              <div className="text-sm font-bold" style={{ color: '#14482E' }}>
                 {varieties[selectedVariety].vaseLife}
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Features */}
+          {/* Features - Enhanced design */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="bg-white p-6 rounded-lg shadow-sm border hover:shadow-md transition-shadow"
-            style={{ borderColor: '#dcfce7' }}
+            className="bg-gradient-to-br from-green-50 via-white to-green-50 p-6 rounded-2xl shadow-lg border-2 border-green-200"
           >
-            <h4 className="font-bold mb-4" style={{ color: '#14482E' }}>Key Features</h4>
-            <div className="grid grid-cols-2 gap-3">
+            <h4 className="font-bold mb-4 text-lg" style={{ color: '#14482E' }}>Key Features</h4>
+            <div className="grid grid-cols-1 gap-3">
               {varieties[selectedVariety].features.map((feature, index) => (
                 <motion.div 
                   key={index}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.6 + (index * 0.1) }}
-                  className="flex items-center gap-2"
+                  transition={{ delay: 0.6 + (index * 0.08) }}
+                  className="flex items-center gap-3 bg-white/50 p-2 rounded-lg"
                 >
-                  <CheckCircle className="w-4 h-4 flex-shrink-0" style={{ color: '#22c55e' }} />
-                  <span className="text-sm text-gray-700">{feature}</span>
+                  <CheckCircle className="w-5 h-5 flex-shrink-0" style={{ color: '#22c55e' }} />
+                  <span className="text-sm text-gray-800 font-medium">{feature}</span>
                 </motion.div>
               ))}
             </div>
@@ -353,7 +382,7 @@ export default function RoseVarietiesSection() {
         </motion.div>
       </div>
 
-      {/* Variety Selector Grid */}
+      {/* Variety Selector Grid - Enhanced cards */}
       <motion.div 
         variants={containerVariants}
         className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
@@ -365,19 +394,32 @@ export default function RoseVarietiesSection() {
             whileHover={cardHover}
             whileTap={cardTap}
             onClick={() => setSelectedVariety(index)}
-            className={`p-4 rounded-lg border-2 transition-all text-left ${
+            className={`p-4 rounded-2xl border-2 transition-all text-left relative overflow-hidden ${
               selectedVariety === index
-                ? 'shadow-lg transform scale-105'
-                : 'hover:shadow-md'
+                ? 'shadow-2xl'
+                : 'hover:shadow-lg'
             }`}
             style={{
               backgroundColor: selectedVariety === index ? '#f0fdf4' : 'white',
               borderColor: selectedVariety === index ? '#15803d' : '#e5e7eb'
             }}
           >
-            <div className="font-bold mb-1" style={{ color: '#14482E' }}>{variety.name}</div>
-            <div className="text-xs text-gray-600 mb-2">{variety.color}</div>
-            <div className="text-xs text-gray-500">{variety.headSize}</div>
+            {/* Selected indicator */}
+            {selectedVariety === index && (
+              <motion.div
+                layoutId="selected-indicator"
+                className="absolute top-2 right-2 w-2 h-2 bg-green-600 rounded-full"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+              />
+            )}
+            
+            <div className="font-bold mb-1.5 text-sm" style={{ color: '#14482E' }}>{variety.name}</div>
+            <div className="text-xs text-gray-600 mb-1.5 font-medium">{variety.color}</div>
+            <div className="text-xs font-semibold px-2 py-1 bg-green-100 rounded-full inline-block" style={{ color: '#15803d' }}>
+              {variety.headSize}
+            </div>
           </motion.button>
         ))}
       </motion.div>
