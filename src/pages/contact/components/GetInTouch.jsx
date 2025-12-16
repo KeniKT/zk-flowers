@@ -89,18 +89,6 @@ export default function GetInTouch() {
     >
       <div className="max-w-6xl mx-auto">
 
-        {/* HEADER */}
-        <div className={`text-center mb-16 transition-all duration-1000 transform ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-        }`}>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#0F7132' }}>
-            Get in Touch
-          </h1>
-          <p className="text-gray-700 max-w-3xl mx-auto text-lg leading-relaxed">
-            Reach out to us for inquiries, partnership discussions, or flower export information.
-          </p>
-        </div>
-
         <div className="grid lg:grid-cols-2 gap-8">
 
           {/* LEFT SIDE — CONTACT INFO */}
@@ -122,7 +110,7 @@ export default function GetInTouch() {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 mb-2 text-lg">Email</h3>
-                    <p className="text-gray-800 font-medium mb-1">info@zkflowers.com</p>
+                    <p className="text-gray-800 font-medium mb-1">Zkflowers@gmail.com</p>
                     <p className="text-sm text-gray-600">General inquiries</p>
                   </div>
                 </div>
@@ -134,7 +122,8 @@ export default function GetInTouch() {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 mb-2 text-lg">Phone</h3>
-                    <p className="text-gray-800 font-medium mb-1">+251 11 XXX XXXX</p>
+                    <p className="text-gray-800 font-medium mb-1">+251911514608</p>
+                    <p className="text-gray-800 font-medium mb-1">+251936011045</p>
                     <p className="text-sm text-gray-600">Mon–Fri, 8AM–6PM</p>
                   </div>
                 </div>
@@ -160,21 +149,38 @@ export default function GetInTouch() {
                 </h3>
 
                 <div className="flex gap-4 flex-wrap">
-                  {socialMedia.map((s, i) => {
-                    const Icon = s.icon;
-                    return (
-                      <a
-                        key={i}
-                        href={s.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300"
-                        style={{ backgroundColor: '#0F7132' }}
-                      >
-                        <Icon className="w-6 h-6 text-white" />
-                      </a>
-                    );
-                  })}
+                  <a
+                    href="https://facebook.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 group relative overflow-hidden"
+                    style={{ backgroundColor: '#0F7132' }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+                    <Facebook className="w-6 h-6 text-white relative z-10" />
+                  </a>
+                  
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 group relative overflow-hidden"
+                    style={{ backgroundColor: '#0F7132' }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-pink-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+                    <Instagram className="w-6 h-6 text-white relative z-10" />
+                  </a>
+                  
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 group relative overflow-hidden"
+                    style={{ backgroundColor: '#0F7132' }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+                    <Linkedin className="w-6 h-6 text-white relative z-10" />
+                  </a>
                 </div>
               </div>
 
@@ -185,13 +191,13 @@ export default function GetInTouch() {
           <div className={`transition-all duration-1000 delay-300 transform ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}>
-            <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 p-10">
+            <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 p-10 h-full flex flex-col">
 
               <h2 className="text-3xl font-bold mb-8" style={{ color: '#0F7132' }}>
                 Send Us a Message
               </h2>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col">
 
                 {/* NAME */}
                 <input
@@ -249,13 +255,13 @@ export default function GetInTouch() {
                   placeholder="Your Message"
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full p-4 border rounded-lg h-32"
+                  className="w-full p-4 border rounded-lg flex-1 min-h-[120px]"
                 />
 
                 {/* SUBMIT BUTTON */}
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-lg text-white font-bold flex items-center justify-center gap-2"
+                  className="w-full py-4 rounded-lg text-white font-bold flex items-center justify-center gap-2 mt-auto"
                   style={{ backgroundColor: "#0F7132" }}
                 >
                   {status.loading ? <Loader2 className="animate-spin" /> : <Send />}
