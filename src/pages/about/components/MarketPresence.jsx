@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Globe, Truck, Package, Shield, MapPin, TrendingUp, Award, Users } from "lucide-react";
 
-// Import your market images
 import marketMap from "../../../assets/MarketPresence.jpg";
 import productionImage from "../../../assets/MarketPresence1.jpg";
 
@@ -103,11 +102,11 @@ export default function MarketPresence() {
             <div className={`relative overflow-hidden rounded-2xl shadow-xl transition-all duration-700 transform ${
               isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             }`}>
-              <div className="bg-white p-8">
+              <div className="w-full h-80 overflow-hidden rounded-2xl">
                 <img
                   src={marketMap}
                   alt="ZK Flowers Global Market Presence"
-                  className="w-full h-80 object-contain transition-transform duration-500 hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
               </div>
             </div>
@@ -136,15 +135,15 @@ export default function MarketPresence() {
               </div>
             </div>
 
-            {/* Additional Production Image - Clean version without text */}
+            {/* Additional Production Image */}
             <div className={`transition-all duration-700 delay-400 transform ${
               isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             }`}>
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-green-100">
+              <div className="w-full h-64 overflow-hidden rounded-xl shadow-lg border border-green-100">
                 <img
                   src={productionImage}
                   alt="ZK Flowers Production Facilities"
-                  className="w-full h-64 object-cover rounded-lg transition-transform duration-500 hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
               </div>
             </div>
@@ -165,7 +164,7 @@ export default function MarketPresence() {
               </p>
             </div>
 
-            {/* Regional Markets - Middle East card reduced by 0.5 */}
+            {/* Regional Markets */}
             <div className={`grid grid-cols-1 gap-6 transition-all duration-700 delay-800 transform ${
               isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             }`}>
@@ -174,8 +173,8 @@ export default function MarketPresence() {
                   key={index}
                   className={`bg-white rounded-xl shadow-lg border border-green-100 hover:shadow-xl hover:border-green-300 transition-all duration-300 transform hover:-translate-y-1 flex flex-col ${
                     index === regions.length - 1 
-                      ? 'p-5 min-h-[140px] justify-start' // Middle East card - reduced by 0.5
-                      : 'p-7 min-h-[180px] justify-center' // Europe and North America cards
+                      ? 'p-5 min-h-[140px] justify-start'
+                      : 'p-7 min-h-[180px] justify-center'
                   }`}
                 >
                   <div className="flex items-start gap-4">
