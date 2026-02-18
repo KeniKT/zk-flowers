@@ -16,7 +16,7 @@ export default function HeroSection() {
         <div className="flex flex-wrap gap-6 text-sm">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#22c55e' }}></div>
-            <span>1 Active Market</span>
+            <span>2 Active Markets</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#f59e0b' }}></div>
@@ -24,7 +24,7 @@ export default function HeroSection() {
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#3b82f6' }}></div>
-            <span>3 Planned Markets</span>
+            <span>2 Planned Markets</span>
           </div>
         </div>
       </div>
