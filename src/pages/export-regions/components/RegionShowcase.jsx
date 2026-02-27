@@ -33,10 +33,10 @@ export default function RegionShowcase() {
     {
       name: "Middle East",
       flag: "🇦🇪",
-      status: "Planned Expansion",
-      statusColor: "#3b82f6",
-      statusBg: "#eff6ff",
-      accentColor: "#1d4ed8",
+      status: "Active Market",
+      statusColor: "#22c55e",
+      statusBg: "#f0fdf4",
+      accentColor: "#15803d",
       description:
         "Strategic target market with high purchasing power and strong demand for luxury flowers. UAE and Saudi Arabia present significant opportunities for premium rose exports.",
       highlights: [
