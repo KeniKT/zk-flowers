@@ -220,7 +220,7 @@ export default function Footer() {
         <div className="mb-8 md:mb-10 flex justify-center">
           <div className="flex gap-3 md:gap-4">
             <a 
-              href="https://facebook.com" 
+              href="https://www.facebook.com/share/17TD3ouQKV/?mibextid=wwXIfr" 
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all duration-300 border-2 border-white/30 hover:border-white hover:bg-white/20 backdrop-blur-sm hover:scale-110 group relative overflow-hidden"
@@ -230,7 +230,7 @@ export default function Footer() {
               <Facebook className="w-5 h-5 text-white relative z-10" />
             </a>
             <a 
-              href="https://instagram.com" 
+              href="https://www.instagram.com/officalzkflowers?igsh=MWZrNWFwcWdrbjFqZw%3D%3D&utm_source=qr" 
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all duration-300 border-2 border-white/30 hover:border-white hover:bg-white/20 backdrop-blur-sm hover:scale-110 group relative overflow-hidden"
@@ -240,7 +240,7 @@ export default function Footer() {
               <Instagram className="w-5 h-5 text-white relative z-10" />
             </a>
             <a 
-              href="https://linkedin.com" 
+              href="https://www.linkedin.com/company/zk-flowers/" 
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all duration-300 border-2 border-white/30 hover:border-white hover:bg-white/20 backdrop-blur-sm hover:scale-110 group relative overflow-hidden"
