@@ -176,7 +176,7 @@ export default function GetInTouch() {
                 <div className="flex gap-2 flex-wrap">
 
                   <a
-                    href="https://facebook.com"
+                    href="https://www.facebook.com/share/17TD3ouQKV/?mibextid=wwXIfr"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-9 h-9 rounded-full flex items-center justify-center bg-green-600 hover:bg-green-700 transition-colors duration-300 transform hover:-translate-y-0.5"
@@ -186,7 +186,7 @@ export default function GetInTouch() {
                   </a>
 
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/officalzkflowers?igsh=MWZrNWFwcWdrbjFqZw%3D%3D&utm_source=qr"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-9 h-9 rounded-full flex items-center justify-center bg-green-600 hover:bg-green-700 transition-colors duration-300 transform hover:-translate-y-0.5"
@@ -196,7 +196,7 @@ export default function GetInTouch() {
                   </a>
 
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/company/zk-flowers/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-9 h-9 rounded-full flex items-center justify-center bg-green-600 hover:bg-green-700 transition-colors duration-300 transform hover:-translate-y-0.5"
