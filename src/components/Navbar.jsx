@@ -44,9 +44,9 @@ export default function Navbar() {
   ];
 
   const socialLinks = [
-    { href: "https://facebook.com", Icon: Facebook, color: "from-blue-400 to-blue-600" },
-    { href: "https://instagram.com", Icon: Instagram, color: "from-pink-400 to-purple-600" },
-    { href: "https://linkedin.com", Icon: Linkedin, color: "from-blue-500 to-blue-700" }
+    { href: "https://www.facebook.com/share/17TD3ouQKV/?mibextid=wwXIfr", Icon: Facebook, color: "from-blue-400 to-blue-600" },
+    { href: "https://www.instagram.com/officalzkflowers?igsh=MWZrNWFwcWdrbjFqZw%3D%3D&utm_source=qr", Icon: Instagram, color: "from-pink-400 to-purple-600" },
+    { href: "https://www.linkedin.com/company/zk-flowers/", Icon: Linkedin, color: "from-blue-500 to-blue-700" }
   ];
 
   return (
