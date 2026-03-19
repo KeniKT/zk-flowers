@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { Clock, Ship, TrendingUp, Check } from "lucide-react";
 
-// Import images from assets folder
 import NetherlandsImage from "../../../assets/Netherlands.jpg";
-import ScandinaviaImage from "../../../assets/Scandinavia.jpg";
 import MiddleEastImage from "../../../assets/Middle East.jpg";
-import JapanImage from "../../../assets/Japan.jpg";
-import SouthKoreaImage from "../../../assets/South Korea.jpg";
 
 export default function RegionShowcase() {
-  const [selectedRegion, setSelectedRegion] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [active, setActive] = useState(0);
 
   const regions = [
     {
@@ -18,293 +13,198 @@ export default function RegionShowcase() {
       flag: "🇳🇱",
       status: "Active Market",
       statusColor: "#22c55e",
-      description: "Our primary and most established export destination. The Netherlands serves as our gateway to European markets with strong logistics infrastructure and high demand for premium roses.",
+      statusBg: "#f0fdf4",
+      accentColor: "#15803d",
+      description:
+        "Our primary and most established export destination. The Netherlands serves as our gateway to European markets with strong logistics infrastructure and high demand for premium roses.",
       highlights: [
         "Direct flights from Addis Ababa to Amsterdam",
         "Established distribution networks",
         "Year-round consistent demand",
-        "Premium pricing for Ethiopian roses"
+        "Premium pricing for Ethiopian roses",
       ],
-      stats: {
-        transitTime: "8-12 hours",
-        frequency: "Daily",
-        volume: "High"
-      },
-      image: NetherlandsImage
-    },
-    {
-      name: "Scandinavia",
-      flag: "🇸🇪",
-      status: "Developing Market",
-      statusColor: "#f59e0b",
-      description: "Rapidly growing market with increasing appreciation for premium Ethiopian roses. Strong demand from Sweden, Norway, Denmark, and Finland with excellent quality standards.",
-      highlights: [
-        "Growing market awareness",
-        "Premium quality requirements",
-        "Sustainable sourcing preferences",
-        "Year-round import capacity"
+      stats: [
+        { label: "Transit Time", value: "8–12 hrs", icon: Clock },
+        { label: "Frequency", value: "Daily", icon: Ship },
+        { label: "Volume", value: "High", icon: TrendingUp },
       ],
-      stats: {
-        transitTime: "12-16 hours",
-        frequency: "3x weekly",
-        volume: "Medium-High"
-      },
-      image: ScandinaviaImage
+      image: NetherlandsImage,
     },
     {
       name: "Middle East",
       flag: "🇦🇪",
       status: "Planned Expansion",
       statusColor: "#3b82f6",
-      description: "Strategic target market with high purchasing power and strong demand for luxury flowers. UAE and Saudi Arabia present significant opportunities for premium rose exports.",
+      statusBg: "#eff6ff",
+      accentColor: "#1d4ed8",
+      description:
+        "Strategic target market with high purchasing power and strong demand for luxury flowers. UAE and Saudi Arabia present significant opportunities for premium rose exports.",
       highlights: [
         "High-value market potential",
         "Proximity advantage",
         "Luxury segment demand",
-        "Growing floriculture market"
+        "Growing floriculture market",
       ],
-      stats: {
-        transitTime: "4-6 hours",
-        frequency: "Target: Daily",
-        volume: "Projected: High"
-      },
-      image: MiddleEastImage
+      stats: [
+        { label: "Transit Time", value: "4–6 hrs", icon: Clock },
+        { label: "Frequency", value: "Target: Daily", icon: Ship },
+        { label: "Volume", value: "Proj. High", icon: TrendingUp },
+      ],
+      image: MiddleEastImage,
     },
-    {
-      name: "Japan",
-      flag: "🇯🇵",
-      status: "Planned Expansion",
-      statusColor: "#3b82f6",
-      description: "Premium market with exceptional quality standards and strong cultural appreciation for roses. Japanese market values perfection in bloom size, color consistency, and vase life.",
-      highlights: [
-        "Ultra-premium market positioning",
-        "Strict quality requirements",
-        "High-value per stem",
-        "Cultural significance of flowers"
-      ],
-      stats: {
-        transitTime: "14-18 hours",
-        frequency: "Target: Weekly",
-        volume: "Projected: Medium"
-      },
-      image: JapanImage
-    },
-    {
-      name: "South Korea",
-      flag: "🇰🇷",
-      status: "Planned Expansion",
-      statusColor: "#3b82f6",
-      description: "Emerging high-value market with sophisticated consumers and growing demand for imported premium flowers. Strong e-commerce infrastructure supports flower industry growth.",
-      highlights: [
-        "Tech-savvy consumer base",
-        "E-commerce opportunities",
-        "Quality-conscious market",
-        "Growing gift-giving culture"
-      ],
-      stats: {
-        transitTime: "14-18 hours",
-        frequency: "Target: Weekly",
-        volume: "Projected: Medium"
-      },
-      image: SouthKoreaImage
-    }
   ];
 
-  const handleRegionChange = (index) => {
-    setIsTransitioning(true);
-    setSelectedRegion(index);
-    
-    // Reset transitioning state after animation completes
-    setTimeout(() => {
-      setIsTransitioning(false);
-    }, 300);
-  };
+  const region = regions[active];
 
   return (
-    <section className="max-w-6xl mx-auto py-16 px-4 animate-fade-in">
-      <div className="grid lg:grid-cols-2 gap-8 mb-12">
-        {/* Region Image & Info */}
-        <div className="space-y-6">
-          <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg group">
-            <div className="relative h-full w-full overflow-hidden">
-              <img
-                src={regions[selectedRegion].image}
-                alt={regions[selectedRegion].name}
-                className={`w-full h-full object-cover transition-all duration-500 transform ${
-                  isTransitioning ? 'scale-110 opacity-80' : 'scale-100 opacity-100'
-                } group-hover:scale-105`}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent transition-opacity duration-300"></div>
-              <div className="absolute top-6 right-6 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full transform transition-transform duration-300 hover:scale-105">
-                <span className="text-sm font-semibold" style={{ color: regions[selectedRegion].statusColor }}>
-                  {regions[selectedRegion].status}
-                </span>
-              </div>
-            </div>
-          </div>
+    <section className="max-w-6xl mx-auto py-16 px-4">
 
-          {/* Stats Cards */}
-          <div className="grid grid-cols-3 gap-4">
-            <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 hover:shadow-md transition-all duration-300 hover:-translate-y-1" style={{ borderColor: '#15803d' }}>
-              <Clock className="w-6 h-6 mb-2 transform transition-transform duration-300 hover:rotate-12" style={{ color: '#14482E' }} />
-              <div className="text-xs text-gray-600 mb-1">Transit Time</div>
-              <div className="text-sm font-bold transition-all duration-300" style={{ color: '#14482E' }}>
-                {regions[selectedRegion].stats.transitTime}
-              </div>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 hover:shadow-md transition-all duration-300 hover:-translate-y-1" style={{ borderColor: '#15803d' }}>
-              <Ship className="w-6 h-6 mb-2 transform transition-transform duration-300 hover:rotate-12" style={{ color: '#14482E' }} />
-              <div className="text-xs text-gray-600 mb-1">Frequency</div>
-              <div className="text-sm font-bold transition-all duration-300" style={{ color: '#14482E' }}>
-                {regions[selectedRegion].stats.frequency}
-              </div>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 hover:shadow-md transition-all duration-300 hover:-translate-y-1" style={{ borderColor: '#15803d' }}>
-              <TrendingUp className="w-6 h-6 mb-2 transform transition-transform duration-300 hover:rotate-12" style={{ color: '#14482E' }} />
-              <div className="text-xs text-gray-600 mb-1">Volume</div>
-              <div className="text-sm font-bold transition-all duration-300" style={{ color: '#14482E' }}>
-                {regions[selectedRegion].stats.volume}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Region Details */}
-        <div className="space-y-6">
-          <div className="transition-all duration-500">
-            <div className="flex items-center gap-4 mb-4">
-              <span className="text-6xl transition-transform duration-300 hover:scale-110 inline-block">
-                {regions[selectedRegion].flag}
-              </span>
-              <div className="overflow-hidden">
-                <h2 
-                  className="text-4xl font-bold transform transition-all duration-500" 
-                  style={{ color: '#14482E' }}
-                >
-                  {regions[selectedRegion].name}
-                </h2>
-                <div className="flex items-center gap-2 mt-1">
-                  <div 
-                    className="w-2 h-2 rounded-full transition-all duration-300"
-                    style={{ backgroundColor: regions[selectedRegion].statusColor }}
-                  ></div>
-                  <span className="text-sm text-gray-600">{regions[selectedRegion].status}</span>
-                </div>
-              </div>
-            </div>
-            
-            <p className="text-gray-700 leading-relaxed mb-6 transition-all duration-500">
-              {regions[selectedRegion].description}
-            </p>
-
-            <div 
-              className="bg-white p-6 rounded-lg shadow-sm border transform transition-all duration-500 hover:shadow-md hover:-translate-y-1" 
-              style={{ borderColor: '#dcfce7' }}
-            >
-              <h3 className="font-bold mb-4" style={{ color: '#14482E' }}>Key Highlights</h3>
-              <div className="space-y-3">
-                {regions[selectedRegion].highlights.map((highlight, index) => (
-                  <div 
-                    key={index} 
-                    className="flex items-start gap-3 transform transition-all duration-300 hover:translate-x-2 hover:bg-green-50 p-2 rounded-lg"
-                  >
-                    <Check className="w-5 h-5 flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110" style={{ color: '#22c55e' }} />
-                    <span className="text-sm text-gray-700">{highlight}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Region Selector */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        {regions.map((region, index) => (
+      {/* Tab switcher */}
+      <div className="flex gap-2 mb-10 p-1 bg-gray-100 rounded-2xl w-fit">
+        {regions.map((r, i) => (
           <button
-            key={index}
-            onClick={() => handleRegionChange(index)}
-            className={`p-4 rounded-lg border-2 transition-all duration-300 transform ${
-              selectedRegion === index
-                ? 'shadow-lg scale-105 ring-2 ring-offset-2 ring-green-500/30'
-                : 'hover:shadow-md hover:scale-102'
-            } active:scale-95`}
+            key={i}
+            onClick={() => setActive(i)}
+            className="flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300"
             style={{
-              backgroundColor: selectedRegion === index ? '#f0fdf4' : 'white',
-              borderColor: selectedRegion === index ? '#15803d' : '#dcfce7'
+              background: active === i ? "#14482E" : "transparent",
+              color: active === i ? "#fff" : "#6b7280",
+              boxShadow: active === i ? "0 2px 12px rgba(20,72,46,0.18)" : "none",
             }}
           >
-            <div className="text-4xl mb-2 transition-transform duration-300 hover:scale-110">
-              {region.flag}
-            </div>
-            <div className="text-sm font-semibold transition-colors duration-300" style={{ color: '#14482E' }}>
-              {region.name}
-            </div>
-            <div className="flex items-center justify-center gap-1 mt-2">
-              <div 
-                className="w-2 h-2 rounded-full transition-all duration-300"
-                style={{ backgroundColor: region.statusColor }}
-              ></div>
-            </div>
+            <span style={{ fontSize: 18 }}>{r.flag}</span>
+            {r.name}
           </button>
         ))}
       </div>
 
-      {/* Add these CSS animations to your global styles (index.css or App.css) */}
-      <style jsx="true">{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes slideInLeft {
-          from { opacity: 0; transform: translateX(-30px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes slideInRight {
-          from { opacity: 0; transform: translateX(30px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.7; }
-        }
-        
-        .animate-fade-in {
-          animation: fadeIn 0.8s ease-out;
-        }
-        
-        .animate-slide-in-left {
-          animation: slideInLeft 0.6s ease-out;
-        }
-        
-        .animate-slide-in-right {
-          animation: slideInRight 0.6s ease-out;
-        }
-        
-        .animate-pulse-slow {
-          animation: pulse 2s infinite;
-        }
-        
-        /* Smooth transitions for all elements */
-        * {
-          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        /* Staggered animation for region selector */
-        .region-selector-btn {
-          animation: fadeIn 0.5s ease-out;
-          animation-fill-mode: both;
-        }
-        
-        .region-selector-btn:nth-child(1) { animation-delay: 0.1s; }
-        .region-selector-btn:nth-child(2) { animation-delay: 0.2s; }
-        .region-selector-btn:nth-child(3) { animation-delay: 0.3s; }
-        .region-selector-btn:nth-child(4) { animation-delay: 0.4s; }
-        .region-selector-btn:nth-child(5) { animation-delay: 0.5s; }
-      `}</style>
+      {/* Main split layout */}
+      <div className="grid lg:grid-cols-2 rounded-3xl overflow-hidden shadow-2xl" style={{ minHeight: 520 }}>
+
+        {/* Left — full bleed image */}
+        <div className="relative" style={{ minHeight: 340 }}>
+          <img
+            src={region.image}
+            alt={region.name}
+            className="w-full h-full object-cover transition-all duration-700"
+            style={{ position: "absolute", inset: 0 }}
+          />
+          {/* Dark gradient overlay */}
+          <div
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.18) 55%, transparent 100%)" }}
+          />
+
+          {/* Bottom-left text on image */}
+          <div className="absolute bottom-0 left-0 p-8">
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-3"
+              style={{ background: region.statusBg, color: region.accentColor }}
+            >
+              <span
+                className="w-2 h-2 rounded-full"
+                style={{ background: region.statusColor }}
+              />
+              {region.status}
+            </div>
+            <div className="text-white text-4xl font-bold mb-1 flex items-center gap-3">
+              <span style={{ fontSize: 40 }}>{region.flag}</span>
+              {region.name}
+            </div>
+          </div>
+
+          {/* Stat strip at very bottom overlaying the image */}
+          <div
+            className="absolute bottom-0 left-0 right-0"
+            style={{ background: "rgba(20,72,46,0.88)", backdropFilter: "blur(6px)" }}
+          >
+            <div className="grid grid-cols-3 divide-x divide-white/10">
+              {region.stats.map((stat, i) => {
+                const Icon = stat.icon;
+                return (
+                  <div key={i} className="px-5 py-4 flex flex-col gap-1">
+                    <div className="flex items-center gap-1.5">
+                      <Icon className="w-3.5 h-3.5 text-green-300" />
+                      <span className="text-green-200 text-xs">{stat.label}</span>
+                    </div>
+                    <span className="text-white text-sm font-bold">{stat.value}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Right — details panel */}
+        <div className="bg-white flex flex-col justify-center px-10 py-12">
+          <p className="text-gray-600 text-base leading-relaxed mb-8">
+            {region.description}
+          </p>
+
+          <div
+            className="rounded-2xl p-6"
+            style={{ background: "#f8fdf9", border: "1px solid #d1fae5" }}
+          >
+            <h3
+              className="text-xs font-bold uppercase tracking-widest mb-5"
+              style={{ color: "#14482E" }}
+            >
+              Key Highlights
+            </h3>
+            <ul className="space-y-3">
+              {region.highlights.map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span
+                    className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
+                    style={{ background: "#14482E" }}
+                  >
+                    <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                  </span>
+                  <span className="text-gray-700 text-sm leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-8 grid grid-cols-3 gap-4">
+            {region.stats.map((stat, i) => {
+              const Icon = stat.icon;
+              return (
+                <div
+                  key={i}
+                  className="flex flex-col gap-2 rounded-xl p-4"
+                  style={{ background: "#f8fdf9", border: "1px solid #d1fae5" }}
+                >
+                  <div className="flex items-center gap-1.5">
+                    <Icon className="w-4 h-4" style={{ color: "#14482E" }} />
+                    <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: "#14482E" }}>
+                      {stat.label}
+                    </span>
+                  </div>
+                  <span className="text-gray-800 text-base font-bold">{stat.value}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom region switcher dots */}
+      <div className="flex justify-center gap-2 mt-6">
+        {regions.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className="rounded-full transition-all duration-300"
+            style={{
+              width: active === i ? 24 : 8,
+              height: 8,
+              background: active === i ? "#14482E" : "#d1d5db",
+            }}
+          />
+        ))}
+      </div>
+
     </section>
   );
 }

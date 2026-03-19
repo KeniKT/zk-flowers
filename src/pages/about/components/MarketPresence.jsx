@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Globe, Truck, Package, Shield, MapPin, TrendingUp, Award, Users } from "lucide-react";
 
 // Import your market images
-import marketMap from "../../../assets/Production.jpg";
-import productionImage from "../../../assets/Production1.jpg"; // Using Production1.jpg for the gap
+import marketMap from "../../../assets/MarketPresence.jpg";
+import productionImage from "../../../assets/MarketPresence1.jpg";
 
 export default function MarketPresence() {
   const [isVisible, setIsVisible] = useState(false);

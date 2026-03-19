@@ -60,17 +60,6 @@ export default function PartnersShowcase() {
       benefits: ["Wide reach", "Premium positioning", "Market intelligence", "Brand visibility"]
     },
     {
-      name: "Scandinavian Flower Group",
-      category: 'distributors',
-      country: "Sweden",
-      flag: "🇸🇪",
-      description: "Premier distributor serving Nordic markets with focus on sustainable sourcing",
-      partnership: "Growing partnership since 2018",
-      volume: "Medium-High Volume",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
-      benefits: ["Nordic coverage", "Sustainability focus", "Stable orders", "Premium pricing"]
-    },
-    {
       name: "European Flower Retailers",
       category: 'retailers',
       country: "Multi-Country",
@@ -80,17 +69,6 @@ export default function PartnersShowcase() {
       volume: "Medium Volume",
       image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80",
       benefits: ["Direct retail access", "Brand exposure", "Customer feedback", "Market trends"]
-    },
-    {
-      name: "Ethiopian Airlines Cargo",
-      category: 'logistics',
-      country: "Ethiopia",
-      flag: "🇪🇹",
-      description: "Africa's largest cargo carrier with extensive global network",
-      partnership: "Primary logistics partner",
-      volume: "Daily Flights",
-      image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80",
-      benefits: ["Direct flights", "Cold chain", "Reliable schedule", "Competitive rates"]
     },
     {
       name: "DHL Express",
@@ -113,17 +91,6 @@ export default function PartnersShowcase() {
       volume: "Growing",
       image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80",
       benefits: ["Market entry", "Local expertise", "High-value segment", "Growth potential"]
-    },
-    {
-      name: "Asian Flower Network",
-      category: 'exporters',
-      country: "Japan & Korea",
-      flag: "🇯🇵",
-      description: "Premium flower distributor specializing in Asian luxury markets",
-      partnership: "Strategic expansion partner",
-      volume: "Planned",
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
-      benefits: ["Premium positioning", "Quality standards", "Market education", "Long-term growth"]
     }
   ];
 
@@ -138,7 +105,7 @@ export default function PartnersShowcase() {
       style={{ backgroundColor: '#f0fdf4' }}
     >
       <div className="max-w-6xl mx-auto">
-        {/* Heading - matching StorySection style */}
+        {/* Heading */}
         <div className={`mb-12 transition-all duration-700 transform ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>

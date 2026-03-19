@@ -4,7 +4,7 @@ import { Target, Sprout, TrendingUp, Users, Plane } from "lucide-react";
 export default function HeroSection() {
   const operationalMetrics = [
     { label: "Farm Size", value: "22 ha", icon: Sprout },
-    { label: "Daily Production", value: "50K+ stems", icon: TrendingUp },
+    { label: "Daily Production", value: "70K+ stems", icon: TrendingUp },
     { label: "Workforce", value: "400+", icon: Users },
     { label: "Export Frequency", value: "Daily", icon: Plane }
   ];
